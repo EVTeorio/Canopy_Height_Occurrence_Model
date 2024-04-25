@@ -1,0 +1,55 @@
+#Packages
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(geepack)
+
+#Combining Tree height survey and Census data
+Census_DBH <- read.csv("Data/20plusdata.csv")
+Heights <- read.csv("Data/Paint Rock tree heights.csv")
+
+
+Merged <- merge(Heights,Census_DBH,by=c('tag'),all.x=T)
+
+summary(DBH_HeightValue)
+DBH_HeightValue <- select(Merged, c('tag','sp.x','quadrat.x','dbh.x','hom.x','Height..m.','Notes'))
+totalomit <- DBH_HeightValue[complete.cases(DBH_HeightValue$Height..m.),]
+write.csv(totalomit,"Data/DBH_HeightValues.csv")
+
+
+dplyr::fil
+
+
+
+# Starting with a merged dataset with no NA values because it only worked in RStudio.
+No_NA_Mearged <- read.csv("Data/CleanDBH_Height.csv")
+
+
+
+str(No_NA_Mearged)
+
+# Pearson correlation
+pearson <- cor(No_NA_Mearged$dbh.x, No_NA_Mearged$Height..m.)
+print(pearson)
+pearson
+#anova
+anova <- anova(No_NA_Mearged$Height..m. ~ No_NA_Mearged$dbh.x)
+anova(No_NA_Mearged$Height..m., No_NA_Mearged$dbh.x)
+#geepack
+geeglm()
+
+#save model
+m1 <- glm(No_NA_Mearged$dbh.x ~ No_NA_Mearged$Height..m,
+  data = dat,
+  family = "binomial")
+sp.x
+
+
+#Grouping
+Grouped <- group_by(No_NA_Mearged,'sp.x') %>%
+  nest() %>%
+  mutate(data = data %>% map(pull, y)) %>%
+  pull(data) %>%
+  setNames(unique('sp.x'))
+
+
